@@ -24,9 +24,9 @@ gulp.task('default', [ 'watch-compile' ])
 
 gulp.task('build', function () {
 	atom({
-		srcPath: './compile',
-		releasePath: './build',
-		cachePath: './cache',
+		srcPath: './',
+		releasePath: '../build',
+		cachePath: '../cache',
 		version: 'v0.30.2',
 		rebuild: false,
 		platforms: [ 'darwin-x64' ]

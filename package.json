@@ -2,7 +2,9 @@
   "name": "shakeitoff",
   "version": "0.1.0",
   "description": "UI interface for changing MAC addresses easily",
-  "scripts": {},
+  "scripts": {
+    "distribute": "electron-packager ./ shakeitoff --platform=darwin --arch=x64 --version=0.31.2"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/ghostbar/shakeitoff.git"
@@ -18,7 +20,8 @@
     "material-ui": "^0.11.0",
     "react": "^0.13.3",
     "react-tap-event-plugin": "^0.1.7",
-    "spoof": "^1.0.1"
+    "spoof": "^1.0.1",
+    "sudo-prompt": "^1.1.5"
   },
   "devDependencies": {
     "gulp": "^3.9.0",

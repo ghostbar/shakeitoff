@@ -8,6 +8,8 @@ var ListItem = mui.ListItem
 var ListDivider = mui.ListDivider
 var ThemeManager = new mui.Styles.ThemeManager()
 var spoof = window.require('spoof')
+var sudo = window.require('sudo-prompt')
+sudo.setName('shakeitoff')
 
 var Main = React.createClass({
   childContextTypes: { muiTheme: React.PropTypes.object },
@@ -26,11 +28,19 @@ var Main = React.createClass({
   _handleLoadInterfaces: function () {
     this.setState({ interfaces: this.getInterfaces() })
   },
+  randomizeMAC: function (device) {
+    console.log('CALLING ALL THE PEOPLE! SUDO!')
+    sudo.exec('echo \'' + device + '\'', function (err) {
+      console.log(err)
+    })
+  },
   render: function () {
+    var self = this
     var interfaces = this.state.interfaces.map(function (item) {
       return (
         <div key={item.device}>
           <ListItem
+            onClick={self.randomizeMAC.bind(this, item.device)}
             primaryText={item.device + ' / ' + item.port}
             secondaryText={
               <p>

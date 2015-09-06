@@ -1,0 +1,33 @@
+{
+  "name": "shakeitoff",
+  "version": "0.1.0",
+  "description": "UI interface for changing MAC addresses easily",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ghostbar/shakeitoff.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ghostbar/shakeitoff/issues"
+  },
+  "homepage": "https://github.com/ghostbar/shakeitoff",
+  "author": "Jose-Luis Rivas <me@ghostbar.co>",
+  "main": "main.js",
+  "dependencies": {
+    "browserify": "^11.0.1",
+    "material-ui": "^0.11.0",
+    "react": "^0.13.3",
+    "react-tap-event-plugin": "^0.1.7",
+    "spoof": "^1.0.1"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.0",
+    "gulp-atom": "^0.1.0",
+    "gulp-install": "^0.5.0",
+    "gulp-less": "^3.0.3",
+    "reactify": "^1.1.1",
+    "require-dir": "^0.3.0",
+    "run-sequence": "^1.1.2",
+    "vinyl-source-stream": "^1.1.0"
+  }
+}

@@ -1,14 +1,8 @@
-(function () {
-  var React = require('react')
-  var injectTapEventPlugin = require('react-tap-event-plugin')
-  var Main = require('./main/Main.jsx')
-  var spoof = require('spoof')
-  var remote = window.require('remote')
+var React = require('react/addons')
+var injectTapEventPlugin = require('react-tap-event-plugin')
+var Main = require('./main.jsx')
 
-  injectTapEventPlugin()
-	window.React = React
+injectTapEventPlugin()
+window.React = React
 
-	React.render(
-    <Main />, document.body
-  )
-})()
+React.render(<Main />, document.body)

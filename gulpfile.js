@@ -1,7 +1,6 @@
 var gulp = require('gulp')
 var atom = require('gulp-atom')
 var browserify = require('browserify')
-var install = require('gulp-install')
 var less = require('gulp-less')
 var reactify = require('reactify')
 var source = require('vinyl-source-stream')
@@ -12,7 +11,6 @@ function watchAndRebuild () {
 
 function watchAndRecompile () {
 	gulp.watch('./src/components/**/*', [ 'browserify' ])
-	gulp.watch([ './src/index.html', './src/index.js' ], [ 'through' ])
 	gulp.watch('./src/style/**/*', [ 'less' ])
 }
 
@@ -35,15 +33,10 @@ gulp.task('build', function () {
 	})
 })
 
-gulp.task('through', function () {
-	return gulp.src([ './src/index.html', './src/index.js' ])
-		.pipe(gulp.dest('./compile'))
-})
-
 gulp.task('less', function () {
-	return gulp.src('./style/**/*.less')
+	return gulp.src('./src/style/**/*.less')
 		.pipe(less())
-		.pipe(gulp.dest('./compile/style'))
+		.pipe(gulp.dest('./compile'))
 })
 
 gulp.task('browserify', function () {
@@ -52,19 +45,11 @@ gulp.task('browserify', function () {
 		transform: [ reactify ]
 	})
 	return bundler.bundle()
-		.pipe(source('app.jsx'))
+		.pipe(source('bundle.js'))
 		.pipe(gulp.dest('./compile'))
 })
 
 gulp.task('compile', [
   'browserify',
-  'through',
-  'less',
-  'install'
+  'less'
 ])
-
-gulp.task('install', function () {
-	return gulp.src('./package.json')
-		.pipe(gulp.dest('./compile'))
-		.pipe(install({ production: true }))
-})

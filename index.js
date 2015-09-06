@@ -12,10 +12,10 @@ app.on('window-all-closed', function () {
 
 app.on('ready', function () {
   mainWindow = new BrowserWindow({
-    width: 401
-    , height: 600
-    , resizable: true
-    , frame: true
+    width: 400,
+    height: 400,
+    resizable: false,
+    frame: false
   })
 
   mainWindow.loadUrl('file://' + __dirname + '/index.html')

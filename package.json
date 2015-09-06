@@ -21,7 +21,7 @@
     "react": "^0.13.3",
     "react-tap-event-plugin": "^0.1.7",
     "spoof": "^1.0.1",
-    "sudo-prompt": "^1.1.5"
+    "sudo-fn": "^1.1.1"
   },
   "devDependencies": {
     "gulp": "^3.9.0",

@@ -44,11 +44,16 @@ function resetMAC (device) {
 function createDOMForInterfaces (interfaces) {
   var html = '<ul>'
   interfaces.forEach(function (item) {
-    html = html + '<li id="' + item.device + '"><span>' + item.device +
+    html = html + '<li id="' + item.device + '"><div class="content">' +
+      '<span class="dark">' + item.device +
       ' / ' + item.port + '</span><br/>' +
-      item.address + ' / ' + item.currentAddress + '<br/>' +
-      '<a href="#" id="reset-' + item.device + '">Reset MAC</a> ' +
-      '<a href="#" id="randomize-' + item.device + '">Randomize MAC</a></li>'
+      '<span class="dark">Original MAC</span> ' + item.address + '<br/>' +
+      '<span class="dark">Current MAC</span> ' + item.currentAddress + '<br/>' +
+      '</div><!-- .content -->' +
+      '<a href="#" class="reset" id="reset-' + item.device +
+      '" title="Reset MAC"><i class="material-icons">settings_backup_restore</i></a> ' +
+      '<a href="#" class="randomize" id="randomize-' + item.device +
+      '" title="Randomize MAC"><i class="material-icons">repeat</i></a></li>'
   })
   html = html + '</ul>'
   document.getElementById('interfaces-list').innerHTML = html

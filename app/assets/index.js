@@ -18,6 +18,13 @@ function loadInterfaces () {
   })
 }
 
+/**
+ * set a MAC address using `sudo-fn` to get administrator permissions
+ *
+ * @param {String} device
+ * @param {String} address
+ * @param {String} port
+ */
 function setMACAddress (device, address, port) {
   sudo.setName('shakeitoff')
   sudo.call({
@@ -30,17 +37,32 @@ function setMACAddress (device, address, port) {
   })
 }
 
+/**
+ * randomizes a MAC address
+ *
+ * @param {String} device
+ */
 function randomizeMAC (device) {
   var it = spoof.findInterface(device)
   var randomMAC = spoof.random()
   setMACAddress(device, randomMAC, it.port)
 }
 
+/**
+ * resets a MAC address to it's original value
+ *
+ * @param {String} device
+ */
 function resetMAC (device) {
   var it = spoof.findInterface(device)
   setMACAddress(device, it.address, it.port)
 }
 
+/**
+ * creates the DOM for the interfaces list
+ *
+ * @param {Object[]} interfaces the array of interfaces available
+ */
 function createDOMForInterfaces (interfaces) {
   var html = '<ul>'
   interfaces.forEach(function (item) {
@@ -59,6 +81,11 @@ function createDOMForInterfaces (interfaces) {
   document.getElementById('interfaces-list').innerHTML = html
 }
 
+/**
+ * listens on events from the listed interfaces
+ *
+ * @param {Object[]} interfaces the array of interfaces available
+ */
 function listenOnInterfacesListElements (interfaces) {
   interfaces.forEach(function (item) {
     var resetButton = document.getElementById('reset-' + item.device)
@@ -74,6 +101,10 @@ function listenOnInterfacesListElements (interfaces) {
   })
 }
 
+/**
+ * gets the interfaces list and sends it to create a dom for it and listen to
+ * events on those newly created DOM objects
+ */
 function getInterfacesList () {
   var interfaces = loadInterfaces()
   createDOMForInterfaces(interfaces)

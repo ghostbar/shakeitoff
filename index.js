@@ -15,10 +15,10 @@ app.on('ready', function () {
     width: 400,
     height: 400,
     resizable: false,
-    frame: false
+    frame: true
   })
 
-  mainWindow.loadUrl('file://' + __dirname + '/index.html')
+  mainWindow.loadUrl('file://' + __dirname + '/app/main.html')
 
   mainWindow.on('closed', function () {
     mainWindow = null

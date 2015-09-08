@@ -4,7 +4,7 @@
   "description": "GUI for changing MAC addresses with spoof",
   "scripts": {
     "start": "electron index.js",
-    "distribute": "electron-packager ./ shakeitoff --platform=darwin,linux --arch=x64 --version=0.31.2 --ignore='node_modules/electron-(packager|prebuild)'"
+    "distribute": "electron-packager ./ shakeitoff --platform=darwin,linux --arch=x64 --version=0.31.2 --ignore='node_modules/(electron-(packager|prebuild)|gulp|gulp-less)'"
   },
   "repository": {
     "type": "git",
@@ -24,7 +24,6 @@
   },
   "devDependencies": {
     "electron-prebuilt": "^0.31.2",
-    "babelify": "^6.3.0",
     "browserify": "^11.0.1",
     "gulp": "^3.9.0",
     "gulp-less": "^3.0.3",

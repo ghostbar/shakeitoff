@@ -67,10 +67,9 @@ function resetMAC (device) {
 function createDOMForInterfaces (interfaces) {
   require('fs')
     .readFile(__dirname + '/assets/tmpl/interfaces-list.tmpl', function (err, template) {
-    console.log(err)
-    console.log(template.toString())
     var html = Mustache.render(template.toString(), {interfaces: interfaces})
     document.getElementById('interfaces-list').innerHTML = html
+    listenOnInterfacesListElements(interfaces)
   })
 }
 
@@ -101,7 +100,6 @@ function listenOnInterfacesListElements (interfaces) {
 function getInterfacesList () {
   var interfaces = loadInterfaces()
   createDOMForInterfaces(interfaces)
-  listenOnInterfacesListElements(interfaces)
 }
 
 domready(function () {

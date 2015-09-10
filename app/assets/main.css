@@ -97,11 +97,17 @@ h1 {
 }
 #main #interfaces-list li .randomize {
   float: right;
-  margin-top: 30px;
+  margin-top: 20px;
   margin-right: -23px;
 }
 #main #interfaces-list li .reset {
   float: right;
+  margin-top: -10px;
+}
+#main #interfaces-list li .set-specific {
+  float: right;
+  margin-top: 47px;
+  margin-right: -25px;
 }
 #main #interfaces-list span.dark {
   font-weight: bold;

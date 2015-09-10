@@ -1,7 +1,16 @@
 <div class="overlay" id="set-specific-mac-dialog">
   <div>
-    <p>Test</p>
+    <form>
+      <div>
+        <label for="proposed-mac">MAC address to set</label>
+        <input type="text" id="proposed-mac" />
+      </div>
 
-    <a href="#" onclick="toggleVisibilitySetSpecificMacDialog()">Close</a>
+      <div class="buttons">
+        <a href="#" id="change-to-{{device}}">Change MAC</a>
+        <a href="#" onclick="toggleVisibilitySetSpecificMacDialog()">Cancel</a>
+      </div>
+    </form>
+
   </div>
 </div> <!-- .dialog -->

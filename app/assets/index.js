@@ -52,6 +52,15 @@ function randomizeMAC (device) {
 }
 
 /**
+ * set specific MAC address
+ *
+ */
+function setSpecificMACAddress (device, mac) {
+  var it = spoof.findInterface(device)
+  setMACAddress(device, mac, it.port)
+}
+
+/**
  * resets a MAC address to it's original value
  *
  * @param {String} device
@@ -121,11 +130,18 @@ function listenOnInterfacesListElements (interfaces) {
       renderTemplate({
         template: 'set-specific-mac-dialog',
         where: 'set-specific-mac-dialog-container',
-        data: {}
+        data: { device: item.device }
       }, function (err) {
         if (err) throw err
         toggleVisibilitySetSpecificMacDialog()
+
+        dom.on(document.getElementById('change-to-' + item.device), 'click', function () {
+          var proposedMAC = document.getElementById('proposed-mac').value
+          setSpecificMACAddress(item.device, proposedMAC)
+          toggleVisibilitySetSpecificMacDialog()
+        })
       })
+
     })
   })
 }

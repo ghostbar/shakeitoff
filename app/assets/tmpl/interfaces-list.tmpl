@@ -1,0 +1,21 @@
+<ul>
+{{#interfaces}}
+<li id="{{device}}">
+  <div class="content">
+    <span class="dark">{{device}} / {{port}}</span><br/>
+    <span class="dark">Original MAC</span> {{address}}<br/>
+    <span class="dark">Current MAC</span> {{currentAddress}}<br/>
+  </div><!-- .content -->
+
+  <a href="#" class="reset" id="reset-{{device}}" title="Reset MAC">
+    <i class="material-icons">settings_backup_restore</i>
+  </a>
+
+  <a href="#" class="randomize" id="randomize-{{device}}" title="Randomize MAC">
+    <i class="material-icons">repeat</i>
+  </a>
+</li>
+{{/interfaces}}
+</ul>
+
+{{^interfaces}}There's no interfaces to show{{/interfaces}}

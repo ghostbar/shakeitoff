@@ -2,6 +2,7 @@ var domready = require('domready')
 var dom = require('dom-events')
 var spoof = require('spoof')
 var sudo = require('sudo-fn')
+var Mustache = require('mustache')
 
 /**
  * calls `spoof` to get the interfaces and filters out the ones it can't change
@@ -64,21 +65,13 @@ function resetMAC (device) {
  * @param {Object[]} interfaces the array of interfaces available
  */
 function createDOMForInterfaces (interfaces) {
-  var html = '<ul>'
-  interfaces.forEach(function (item) {
-    html = html + '<li id="' + item.device + '"><div class="content">' +
-      '<span class="dark">' + item.device +
-      ' / ' + item.port + '</span><br/>' +
-      '<span class="dark">Original MAC</span> ' + item.address + '<br/>' +
-      '<span class="dark">Current MAC</span> ' + item.currentAddress + '<br/>' +
-      '</div><!-- .content -->' +
-      '<a href="#" class="reset" id="reset-' + item.device +
-      '" title="Reset MAC"><i class="material-icons">settings_backup_restore</i></a> ' +
-      '<a href="#" class="randomize" id="randomize-' + item.device +
-      '" title="Randomize MAC"><i class="material-icons">repeat</i></a></li>'
+  require('fs')
+    .readFile(__dirname + '/assets/tmpl/interfaces-list.tmpl', function (err, template) {
+    console.log(err)
+    console.log(template.toString())
+    var html = Mustache.render(template.toString(), {interfaces: interfaces})
+    document.getElementById('interfaces-list').innerHTML = html
   })
-  html = html + '</ul>'
-  document.getElementById('interfaces-list').innerHTML = html
 }
 
 /**

@@ -17,6 +17,7 @@
   "author": "Jose-Luis Rivas <me@ghostbar.co>",
   "main": "index.js",
   "dependencies": {
+    "async": "^1.4.2",
     "dom-events": "^0.1.1",
     "domready": "^1.0.8",
     "mustache": "^2.1.3",

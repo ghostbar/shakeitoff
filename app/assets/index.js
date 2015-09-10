@@ -107,6 +107,7 @@ function listenOnInterfacesListElements (interfaces) {
   interfaces.forEach(function (item) {
     var resetButton = document.getElementById('reset-' + item.device)
     var randomizeButton = document.getElementById('randomize-' + item.device)
+    var setSpecificMacButton = document.getElementById('set-specific-' + item.device)
 
     dom.on(resetButton, 'click', function () {
       resetMAC(item.device)
@@ -115,7 +116,23 @@ function listenOnInterfacesListElements (interfaces) {
     dom.on(randomizeButton, 'click', function () {
       randomizeMAC(item.device)
     })
+
+    dom.on(setSpecificMacButton, 'click', function () {
+      renderTemplate({
+        template: 'set-specific-mac-dialog',
+        where: 'set-specific-mac-dialog-container',
+        data: {}
+      }, function (err) {
+        if (err) throw err
+        toggleVisibilitySetSpecificMacDialog()
+      })
+    })
   })
+}
+
+function toggleVisibilitySetSpecificMacDialog () {
+  var el = document.getElementById('set-specific-mac-dialog')
+  el.style.visibility = (el.style.visibility === 'visible') ? 'hidden' : 'visible'
 }
 
 /**

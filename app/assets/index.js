@@ -3,6 +3,8 @@ var dom = require('dom-events')
 var spoof = require('spoof')
 var sudo = require('sudo-fn')
 var Mustache = require('mustache')
+var async = require('async')
+var fs = require('fs')
 
 /**
  * calls `spoof` to get the interfaces and filters out the ones it can't change
@@ -60,15 +62,38 @@ function resetMAC (device) {
 }
 
 /**
+ *
+ * @param opts {Object}
+ * @param opts.template {String} template name
+ * @param opts.where {String} id where to render the template
+ * @param opts.data {Object} data to be passed to the template
+ */
+function renderTemplate (opts, cb) {
+  opts.data = opts.data || {}
+  fs.readFile(__dirname + '/assets/tmpl/' + opts.template + '.tmpl', function (err, template) {
+    if (err)
+      return cb(err)
+
+    var html = Mustache.render(template.toString(), opts.data)
+    document.getElementById(opts.where).innerHTML = html
+    return cb(null)
+  })
+}
+
+/**
  * creates the DOM for the interfaces list
  *
  * @param {Object[]} interfaces the array of interfaces available
  */
 function createDOMForInterfaces (interfaces) {
-  require('fs')
-    .readFile(__dirname + '/assets/tmpl/interfaces-list.tmpl', function (err, template) {
-    var html = Mustache.render(template.toString(), {interfaces: interfaces})
-    document.getElementById('interfaces-list').innerHTML = html
+  renderTemplate({
+    template: 'interfaces-list',
+    where: 'interfaces-list',
+    data: { interfaces: interfaces }
+  }, function (err) {
+    if (err)
+      throw err
+
     listenOnInterfacesListElements(interfaces)
   })
 }
@@ -102,9 +127,27 @@ function getInterfacesList () {
   createDOMForInterfaces(interfaces)
 }
 
+function injectBasicTemplates (tmpls) {
+  tmpls = tmpls || []
+  async.each(tmpls, function iterator (item, cb) {
+    fs.readFile(__dirname + '/assets/tmpl/' + item + '.tmpl', function injectTemplate (err, template) {
+      if (err)
+        return cb(err)
+
+      var html = Mustache.render(template.toString())
+      document.getElementById(item + '-container').innerHTML = html
+    })
+  }, function done (err) {
+    if (err)
+      throw err
+  })
+}
+
 domready(function () {
   var refreshButton = document.getElementById('refresh-button')
   getInterfacesList()
+
+  injectBasicTemplates()
 
   dom.on(refreshButton, 'click', function () {
     getInterfacesList()
